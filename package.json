@@ -1,0 +1,27 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "An application demostrating my ability to create a basic blog style application using node, express and handlebars",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PastaShock/tech-blog.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "blog",
+    "handlebars",
+    "express",
+    "sequelize"
+  ],
+  "author": "George Pastushokk",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/PastaShock/tech-blog/issues"
+  },
+  "homepage": "https://github.com/PastaShock/tech-blog#readme"
+}
