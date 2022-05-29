@@ -2,33 +2,46 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Blog</title>
-  <link rel="stylesheet" href="/css/jass.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="/css/jass.css">
 </head>
 
 <body>
-  <header class="display-flex justify-space-between align-center p-2">
-    <h1>
-      Tech Blog
-    </h1>
-    {{#if logged_in}}
-    <nav>
-      <button class="btn" id="logout">logout</button>
-    </nav>
-    {{/if}}
-  </header>
-  <main class="container container-fluid mt-5">
-    {{{ body }}}
-  </main>
-  <footer>
-      
-  </footer>
+    <header class="display-flex justify-space-between align-center p-2">
+        <h1>
+            Tech Blog
+        </h1>
+        <nav>
+            <button class="btn" id="home">Home</button>
+        </nav>
+        <nav>
+            <button class="btn" id="users">Users</button>
+        </nav>
+        <nav>
+            <button class="btn" id="login">login</button>
+        </nav>
+        {{#if logged_in}}
+        <nav>
+            <button class="btn" id="dash">Dashboard</button>
+        </nav>
+        <nav>
+            <button class="btn" id="logout">logout</button>
+        </nav>
+        {{/if}}
+    </header>
+    <main class="container container-fluid mt-5">
+        {{{ body }}}
+    </main>
+    <footer>
 
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
+    </footer>
+
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+    <script src="/js/home.js"></script>
 </body>
 
 </html>
