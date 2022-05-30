@@ -1,8 +1,9 @@
+{{#each this}}
 <div class="card">
     <div class="card-header">
         <h4>Comment:</h4>
     </div>
-    <p class="card-body">{{commentBody}}</p>
+    <h5 class="card-body">{{commentBody}}</h5>
         <ul>
             <li>
                 <p>Posted by {{user.name}} </p>
@@ -12,3 +13,4 @@
             </li>
         </ul>
 </div>
+{{/each}}

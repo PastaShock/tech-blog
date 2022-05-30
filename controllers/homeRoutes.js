@@ -63,7 +63,7 @@ router.get('/login', (req, res) => {
 });
 
 
-router.get('/post/:id', (req, res) => {
+router.get('/post/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
             id: req.params.id
@@ -90,7 +90,7 @@ router.get('/post/:id', (req, res) => {
             }
             const post = data.get({ plain: true });
             console.log(post);
-            res.render('post', { post, loggedIn: req.session.loggedIn });
+            res.render('post', { post, loggedIn: req.session.logged_in });
 
 
         })
