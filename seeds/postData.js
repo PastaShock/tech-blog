@@ -1,4 +1,4 @@
-const Day = require('dayjs');
+// const Day = require('dayjs');
 
 // const postArr = [
 //     {
@@ -47,15 +47,15 @@ const createPosts = () => {
         //  author:
         //  body:
         //  date:
-        date = Day(Date()).format('MM/DD/YYY');
+        // let date = Day(Date()).format('MM/DD/YYY');
         postArr.push({
             title: 'title',
             body: 'body',
             author: 'george pastushok',
             // date: date
-        })
+        });
     }
     return postArr;
-}
+};
 
 module.exports = createPosts;

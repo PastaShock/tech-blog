@@ -1,0 +1,19 @@
+const commentData = [
+    {
+        commentBody: 'commentBody',
+        userId: 1,
+        postId: 1,
+    },
+    {
+        commentBody: 'commentBody',
+        userId: 2,
+        postId: 2,
+    },
+    {
+        commentBody: 'commentBody',
+        userId: 3,
+        postId: 3,
+    }
+];
+
+module.exports = commentData;

@@ -8,10 +8,10 @@ router.get('/', async (req, res) => {
             order: [['date', 'ASC']],
             mapToModel: true,
             model: Post
-        })
+        });
         // console.log(postData)
         //   apply the Posts data to a variable
-        const posts = postData.map(project => project.get({ plain: true}))
+        const posts = postData.map(project => project.get({ plain: true}));
         // console.log(postData)
         res.render('blog', {
             posts
