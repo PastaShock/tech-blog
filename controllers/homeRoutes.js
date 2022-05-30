@@ -1,20 +1,34 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
     try {
-        const postData = await Post.findAll({
-            order: [['date', 'ASC']],
+        Post.findAll({
+            attributes: ['id', 'title', 'body', 'date'],
+            order: [['date', 'DESC']],
             mapToModel: true,
-            model: Post
-        });
-        // console.log(postData)
-        //   apply the Posts data to a variable
-        const posts = postData.map(project => project.get({ plain: true}));
-        // console.log(postData)
-        res.render('blog', {
-            posts
+            model: Post,
+            include: [{
+                model: Comment,
+                attributes: ['id', 'commentBody', 'postId', 'userId', 'date'],
+                include: {
+                    model: User,
+                    attributes: ['name']
+                },
+            },
+            {
+                model: User,
+                attributes: ['name']
+            }]
+        }).then(data => {
+            //   apply the Posts data to a variable
+            const posts = data.map(post => post.get({ plain: true }));
+            // render the homepage with the posts
+            res.render('homepage', {
+                posts,
+                loggedIn: req.session.logged_in
+            });
         });
     } catch (err) {
         res.status(500).json(err);
@@ -30,9 +44,9 @@ router.get('/users', withAuth, async (req, res) => {
 
         const users = userData.map((project) => project.get({ plain: true }));
 
-        res.render('homepage', {
+        res.render('usersList', {
             users,
-            logged_in: req.session.logged_in,
+            loggedIn: req.session.logged_in,
         });
     } catch (err) {
         res.status(500).json(err);
@@ -46,6 +60,44 @@ router.get('/login', (req, res) => {
     }
 
     res.render('login');
+});
+
+
+router.get('/post/:id', (req, res) => {
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: ['id', 'body', 'title', 'date'],
+        include: [{
+            model: Comment,
+            attributes: ['id', 'commentBody', 'postId', 'userId', 'date'],
+            include: {
+                model: User,
+                attributes: ['name']
+            }
+        },
+        {
+            model: User,
+            attributes: ['name']
+        }
+        ]
+    })
+        .then(data => {
+            if (!data) {
+                res.status(404).json({ message: 'No post found with this id' });
+                return;
+            }
+            const post = data.get({ plain: true });
+            console.log(post);
+            res.render('post', { post, loggedIn: req.session.loggedIn });
+
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 module.exports = router;

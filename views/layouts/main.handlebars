@@ -19,7 +19,7 @@
         <nav>
             <button class="btn" id="users">Users</button>
         </nav>
-        {{#if logged_in}}
+        {{#if loggedIn}}
         <nav>
             <button class="btn" id="dash">Dashboard</button>
         </nav>
@@ -39,7 +39,7 @@
 
     </footer>
 
-    {{#if logged_in}}
+    {{#if loggedIn}}
     <script src="/js/logout.js"></script>
     {{/if}}
     <script src="/js/home.js"></script>

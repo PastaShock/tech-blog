@@ -3,28 +3,23 @@ const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-    console.log(req.session);
+    // pull all posts from the db where req.user_id matches post.userId
     Post.findAll({
         where: {
-            userId: req.session.userId
+            userId: req.session.user_id
         },
-        attributes: [
-            'id',
-            'title',
-            'body',
-            'date'
-        ],
+        attributes: ['id', 'title', 'body', 'date'],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment', 'postId', 'userId', 'date'],
+            attributes: ['id', 'commentBody', 'postId', 'userId', 'date'],
             include: {
                 model: User,
-                attributes: ['username']
+                attributes: ['name']
             }
         },
         {
             model: User,
-            attributes: ['username']
+            attributes: ['name']
         }
         ]
     })
@@ -42,21 +37,17 @@ router.get('/edit/:id', withAuth, (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id',
-            'title',
-            'body',
-            'date'
-        ],
+        attributes: ['id', 'title', 'body', 'author', 'date'],
         include: [{
             model: User,
-            attributes: ['username']
+            attributes: ['name']
         },
         {
             model: Comment,
-            attributes: ['id', 'body', 'postId', 'userId', 'date'],
+            attributes: ['id', 'commentBody', 'postId', 'userId', 'date'],
             include: {
                 model: User,
-                attributes: ['username']
+                attributes: ['name']
             }
         }
         ]
@@ -76,7 +67,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 });
 router.get('/new', (req, res) => {
-    res.render('create');
+    res.render('create', {loggedIn: true});
 });
 
 

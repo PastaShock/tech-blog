@@ -20,5 +20,4 @@ document.querySelector('#login').addEventListener('click', goLogin);
 const goDash = async () => {
     document.location.replace('/dash');
 };
-
 document.querySelector('#dash').addEventListener('click', goDash);
