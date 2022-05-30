@@ -51,7 +51,7 @@ const createPosts = () => {
         postArr.push({
             title: 'title',
             body: 'body',
-            author: 'george pastushok',
+            author: 1,
             // date: date
         });
     }
