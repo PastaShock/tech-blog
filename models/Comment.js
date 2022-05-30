@@ -16,11 +16,16 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        body: {
+        commentBody: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+      
+        },
+        postId: {
             type: DataTypes.INTEGER,
             allowNull: false,
       
