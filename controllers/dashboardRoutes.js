@@ -8,10 +8,12 @@ router.get('/', withAuth, (req, res) => {
         where: {
             userId: req.session.user_id
         },
-        attributes: ['id', 'title', 'body', 'date'],
+        attributes: ['id', 'title', 'body', 'userId', 'date'],
+        // include from other tables
         include: [{
             model: Comment,
             attributes: ['id', 'commentBody', 'postId', 'userId', 'date'],
+            // foreign key reference within an include
             include: {
                 model: User,
                 attributes: ['name']
@@ -23,21 +25,22 @@ router.get('/', withAuth, (req, res) => {
         }
         ]
     })
-        .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
-            res.render('dashboard', { posts, loggedIn: true });
+        .then(data => {
+            const posts = data.map(post => post.get({ plain: true }));
+            res.render('dashboard', { posts, loggedin: true });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
+
 router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'title', 'body', 'author', 'date'],
+        attributes: ['id', 'title', 'body', 'userId', 'date'],
         include: [{
             model: User,
             attributes: ['name']
@@ -52,22 +55,23 @@ router.get('/edit/:id', withAuth, (req, res) => {
         }
         ]
     })
-        .then(dbPostData => {
-            if (!dbPostData) {
+        .then(data => {
+            if (!data) {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
 
-            const post = dbPostData.get({ plain: true });
-            res.render('edit-post', { post, loggedIn: true });
+            const post = data.get({ plain: true });
+            res.render('edit', { post, loggedIn: true });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
+
 router.get('/new', (req, res) => {
-    res.render('create', {loggedIn: true});
+    res.render('create');
 });
 
 

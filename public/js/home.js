@@ -6,15 +6,17 @@ document.querySelector('#home').addEventListener('click', goHome);
 
 // users button route
 const goUsers = async () => {
-    document.location.replace('/users');
+    document.location.replace('/contributors');
 };
-document.querySelector('#users').addEventListener('click', goUsers);
+document.querySelector('#contributors').addEventListener('click', goUsers);
 
 // create login button for users on the homepage
-const goLogin = async () => {
-    document.location.replace('/login');
-};
-document.querySelector('#login').addEventListener('click', goLogin);
+if (document.querySelector('#login')) {
+    const goLogin = async () => {
+        document.location.replace('/login');
+    };
+    document.querySelector('#login').addEventListener('click', goLogin);
+}
 
 // create dashboard button to navigate to the dashboard
 const goDash = async () => {

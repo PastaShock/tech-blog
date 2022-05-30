@@ -24,13 +24,12 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        author: {
-            type: Sequelize.INTEGER,
+        userId: {
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
-            allowNull: false,
         },
         date: {
             type: DataTypes.DATE,
@@ -42,7 +41,7 @@ Post.init(
         sequelize,
         timestamps: false,
         freezeTableName: true,
-        underscored: true,
+        underscored: false,
         modelName: 'post',
     }
 );

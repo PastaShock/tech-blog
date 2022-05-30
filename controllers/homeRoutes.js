@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/users', withAuth, async (req, res) => {
+router.get('/contributors', withAuth, async (req, res) => {
     try {
         const userData = await User.findAll({
             attributes: { exclude: ['password'] },
@@ -44,7 +44,7 @@ router.get('/users', withAuth, async (req, res) => {
 
         const users = userData.map((project) => project.get({ plain: true }));
 
-        res.render('usersList', {
+        res.render('contributors', {
             users,
             loggedIn: req.session.logged_in,
         });

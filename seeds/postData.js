@@ -10,7 +10,7 @@ const createPosts = () => {
         postArr.push({
             title: 'title',
             body: 'body',
-            author: 1,
+            userId: 1,
         });
     }
     return postArr;

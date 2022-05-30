@@ -17,13 +17,13 @@
             <button class="btn" id="home">Home</button>
         </nav>
         <nav>
-            <button class="btn" id="users">Users</button>
+            <button class="btn" id="contributors">Contributors</button>
         </nav>
-        {{#if loggedIn}}
         <nav>
             <button class="btn" id="dash">Dashboard</button>
         </nav>
         <nav>
+        {{#if loggedIn}}
             <button class="btn" id="logout">logout</button>
         </nav>
         {{else}}
