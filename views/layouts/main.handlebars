@@ -19,15 +19,16 @@
         <nav>
             <button class="btn" id="users">Users</button>
         </nav>
-        <nav>
-            <button class="btn" id="login">login</button>
-        </nav>
         {{#if logged_in}}
         <nav>
             <button class="btn" id="dash">Dashboard</button>
         </nav>
         <nav>
             <button class="btn" id="logout">logout</button>
+        </nav>
+        {{else}}
+        <nav>
+            <button class="btn" id="login">login</button>
         </nav>
         {{/if}}
     </header>

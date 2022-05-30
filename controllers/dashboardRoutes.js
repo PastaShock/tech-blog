@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
+
 router.get('/', withAuth, (req, res) => {
+    console.log(req.session);
     Post.findAll({
         where: {
-            userId: req.session.user_id
+            userId: req.session.userId
         },
         attributes: [
             'id',
@@ -51,7 +53,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         },
         {
             model: Comment,
-            attributes: ['id', 'comment_text', 'postId', 'userId', 'date'],
+            attributes: ['id', 'body', 'postId', 'userId', 'date'],
             include: {
                 model: User,
                 attributes: ['username']
@@ -74,7 +76,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         });
 });
 router.get('/new', (req, res) => {
-    res.render('new-post');
+    res.render('create');
 });
 
 
